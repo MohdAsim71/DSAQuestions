@@ -4,11 +4,11 @@ import java.util.Stack
 
 
 class ListNode(var `val`: Int) {
-    var next: ListNode? = null
+    var next: ListNode1? = null
 }
 
 // Helper function to print the list
-fun printList(head: ListNode?): String {
+fun printList(head: ListNode1?): String {
     val result = StringBuilder()
     var current = head
     while (current != null) {
@@ -23,11 +23,11 @@ fun printList(head: ListNode?): String {
 
 fun main() {
     // Creating a linked list 1 -> 2 -> 3 -> 4 -> 5
-    val head = ListNode(1)
-    head.next = ListNode(2)
-    head.next?.next = ListNode(3)
-    head.next?.next?.next = ListNode(4)
-    head.next?.next?.next?.next = ListNode(5)
+    val head = ListNode1(1)
+    head.next = ListNode1(2)
+    head.next?.next = ListNode1(3)
+    head.next?.next?.next = ListNode1(4)
+    head.next?.next?.next?.next = ListNode1(5)
 
     // Printing the original list
     println("Original List: ${printList(head)}")
@@ -46,10 +46,10 @@ fun main() {
 }
 
 
-fun reverseList(head: ListNode?): ListNode? {
+fun reverseList(head: ListNode1?): ListNode1? {
     var current = head
-    var pre: ListNode? = null
-    var next: ListNode? = null
+    var pre: ListNode1? = null
+    var next: ListNode1? = null
 
     while (current != null) {
         next = current.next
@@ -62,7 +62,7 @@ fun reverseList(head: ListNode?): ListNode? {
 
 }
 
-fun reverseUsingStack(head: ListNode?): ListNode? {
+fun reverseUsingStack(head: ListNode1?): ListNode1? {
     var current = head
     var stack = Stack<Int>()
     while (current != null) {
@@ -70,10 +70,10 @@ fun reverseUsingStack(head: ListNode?): ListNode? {
         current = current.next
     }
 
-    val newReversedList = ListNode(Int.MIN_VALUE)
+    val newReversedList = ListNode1(Int.MIN_VALUE)
     var currentPre = newReversedList
     while (stack.isNotEmpty()) {
-        currentPre.next = ListNode(stack.pop())
+        currentPre.next = ListNode1(stack.pop())
         currentPre = currentPre.next!!
     }
     return newReversedList.next
