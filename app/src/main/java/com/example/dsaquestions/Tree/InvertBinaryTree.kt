@@ -4,13 +4,34 @@ import com.example.dsaquestions.Tree.TreeUtils.TreeNode
 import java.util.LinkedList
 import java.util.Queue
 
+
+
+fun invertTree(node: TreeNode?): TreeNode? {
+    if (node == null) {
+        return null;
+    }
+  val invertNodeQueue: Queue<TreeNode> = LinkedList()
+   invertNodeQueue.add(node)
+   while (!invertNodeQueue.isEmpty())
+   {
+       val treeNode = invertNodeQueue.poll()
+       // Swap nodes
+       val temp: TreeNode = node.left!!
+       node.left = node.right;
+       node.right = temp;
+
+       if(treeNode.left!=null) invertNodeQueue.add(treeNode.left)
+       if(treeNode.right!=null) invertNodeQueue.add(treeNode.right)
+   }
+return node
+}
 fun main(args: Array<String>) {
 
     // Creating a tree that looks like
     //            2
     val root = TreeNode(2)
 
-    // Adding left and right childCountingBits.kt
+    // Adding left and right child
     //            2
     //          /  \
     //        8     4
@@ -45,37 +66,14 @@ fun main(args: Array<String>) {
     //               /
     //              6
     rightNode.right!!.left = TreeNode(6)
-    rightNode.right!!.right = TreeNode(7)
 
     println("\n Original Tree: ")
     printTree1(root)
 
-
-    println("\nmaximumDepthOfBT: ${maxDepth(root)}")
-    //maximumDepthOfBT(invertTree(root))
+    println("\n Invert Tree: ")
+    printTree1(invertTree(root))
 
 }
 
 
-fun maxDepth(root: TreeNode?): Int {
-    if (root == null) return 0
-    val nodes: Queue<TreeNode?> = LinkedList()
-    nodes.add(root)
-    var levels = 0
-    while (!nodes.isEmpty()) {
-        levels++
-        val size = nodes.size
-        for (i in 0 until size) {
-            val poppedNode = nodes.poll()
-            if (poppedNode!!.left != null) nodes.add(poppedNode.left)
-            if (poppedNode.right != null) nodes.add(poppedNode.right)
-        }
-    }
-    return levels
-}
-fun printTree1(node: TreeNode?, prefix: String = "", isLeft: Boolean = true) {
-    if (node != null) {
-        println(prefix + (if (isLeft) "├── " else "└── ") + node.`val`)
-        printTree1(node.left, prefix + (if (isLeft) "│   " else "    "), true)
-        printTree1(node.right, prefix + (if (isLeft) "│   " else "    "), false)
-    }}
+
